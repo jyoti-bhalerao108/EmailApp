@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>
+	Notification Service Options
+	</title>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>	
+	<style type="text/css">
+		.selectt {
+			color: black;
+			padding: 30px;			
+			margin-top: 30px;
+			width: 50%;
+			background: lightblue;
+			margin-left: 20%;
+		}
+		
+		label {
+			margin-right: 20px;
+			text-align: center;
+		}
+		.button{
+			margin-left: 30px;
+		}
+	</style>
+	
+</head>
+
+<body style="text-align: center;">
+	<!-- <center> -->
+		<h1 style="color:green;text-align: center;">
+		Notification Service
+		</h1>
+		<h3 style="text-align: center;">
+		Select notification service options
+		</h3>
+		<form [formGroup]="FormData" (ngSubmit)="onSubmit(FormData.value)" style="text-align: center;">
+		<div>
+			<label>
+				<input type="checkbox" name="notificationCheckbox"
+					value="Email" (change)="onCheckboxChange($event)">Email</label>
+                    <label>
+				<input type="checkbox" name="notificationCheckbox"
+					value="SMS" (change)="onCheckboxChange($event)"> SMS</label>
+		</div>
+		<div *ngIf="showEmail" class="selectt" style="text-align: center;">		
+		<strong>Email Details</strong>        
+        <div>
+        <label for="from">From</label>
+        <input type="email" formControlName="From" name="From">        
+        </div>   
+		<br> 
+		<div>     
+    <label for="emailaddress">To</label>
+    <input type="email" name="EmailAddress" placeholder="Enter email" formControlName="EmailAddress" >
+	</div>
+	<br>     
+    <div>
+    <label for="cc">Cc</label>
+    <input type="email" formControlName="cc" name="Cc">        
+    </div>  
+	<br>   
+    <div>
+    <label for="subject">Subject</label>
+    <input type="text" formControlName="Subject" name="Subject">
+    </div>
+	<br> 
+    <div>
+    <label for="body">Body</label>
+    <textarea formControlName="Body" name="Body">
+    </textarea>
+    </div>
+	<br> 
+	</div>   
+		<div class="SMS selectt" *ngIf="showSMS">
+		<strong>SMS Details</strong>		    
+		 <div>
+        <label for="mobilenumber">To</label>
+        <input type="tel" formControlName="MobileNumber" name="mobilenumber" pattern="[0-9]{10}" placeholder="Enter Mobile Number"  required>        
+        </div>
+		<br> 
+		<div>
+        <label for="smssubject">Subject</label>
+        <input type="text" formControlName="SMSSubject" name="SMSSubject">
+        </div> 
+		<br>        
+        <div>
+        <label for="smsbody">Body</label>
+        <textarea formControlName="SMSBody" name="SMSBody" required>
+        </textarea>
+        </div>
+		<br> 
+    	</div>
+        <br>
+		<button type="submit" [disabled]="!checkboxChecked">Submit</button>
+		<button (click)="cancel()" type="button" class="ui button">Cancel</button>
+		</form>
+    
+	<!-- </center> -->
+</body>
+
+</html>
